@@ -7,6 +7,7 @@ class NPCPlayerController extends MonoBehaviour {
 
 	private var speed : float;
 	
+	private var alive = true;
 
 	public function Start() {
 		this.speed = Random.value * (this.SPEED_MAX - this.SPEED_MIN) + this.SPEED_MIN;
@@ -20,7 +21,9 @@ class NPCPlayerController extends MonoBehaviour {
 	 * On collision with another object
 	 */
 	public function OnCollisionEnter (collision : Collision) {
-		
+		Debug.Log('NPC killed');
+		this.alive = false;
+		Destroy(this.gameObject, 1.0);
 		//Debug.Log('on collision enter');
 		//Debug.Log(collision.collider);
 	}
@@ -29,7 +32,6 @@ class NPCPlayerController extends MonoBehaviour {
 	 * On trigger with a bigger collider that enables collision detection
 	 */
 	public function OnTriggerEnter (collider : Collider) {
-		Debug.Log('---');
 		var closestColliderPoint : Vector3 = collider.ClosestPointOnBounds(this.transform.position);
 		var currentPosition : Vector3 = this.transform.position;
 		var vectorToClosestPoint : Vector3 = closestColliderPoint - currentPosition;
@@ -40,23 +42,24 @@ class NPCPlayerController extends MonoBehaviour {
 		if ((absoluteDotProductWithTop > 0.4) || (vectorToClosestPoint.magnitude < 0.1)) {
 			return; // Nothing to do here we must be colliding with the plan
 		}
-		Debug.Log('O --- O'); 
 		
-		Debug.Log(vectorToClosestPoint);
-		
-		var normalVectorToClosestPoint : Vector3 = Vector3.Normalize(Vector3.Cross(vectorToClosestPoint, Vector3.up));
-		
-		Debug.Log('New direction'); 
-		Debug.Log(normalVectorToClosestPoint);
-		Debug.DrawRay(this.transform.position, normalVectorToClosestPoint, Color.green, 10, false);
-		
-		
-		this.transform.forward = normalVectorToClosestPoint;
+		var rayToSurface = new Ray(this.transform.position, vectorToClosestPoint);
+		var rayHit : RaycastHit;
+		if (!(Physics.Raycast(rayToSurface, rayHit, 10))) {
+			// This case may occure when an object enters in the sphere but won't raise any real collision
+			return;
+		}
+		var normalToObject = rayHit.normal;
+		var reflection = Vector3.Reflect(vectorToClosestPoint, normalToObject);
+		reflection.y = 0;		
+		this.transform.forward = reflection;
 	}
 	
 	private function translate() {
-
-		var translationVector : Vector3 = this.transform.forward;
+		if (!alive) {
+			return;
+		}
+		var translationVector : Vector3 = Vector3.forward;
 		translationVector *= this.speed;
 		translationVector *= Time.deltaTime;
 		this.transform.Translate(translationVector);
