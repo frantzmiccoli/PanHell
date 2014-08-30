@@ -1,0 +1,162 @@
+fileFormatVersion: 2
+guid: a4a108441b53263498abc32523d0ae83
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: Corner Tube
+    100002: Corner Tube.001
+    100004: Corner Tube.002
+    100006: Corner Tube.003
+    100008: Corner Tube.004
+    100010: Corner Tube.005
+    100012: Cube
+    100014: Cylinder
+    100016: Cylinder.001
+    100018: Cylinder.002
+    100020: Cylinder.003
+    100022: Deck
+    100024: Main Building
+    100026: //RootNode
+    100028: Path for Tube.003
+    100030: Path for Tube.004
+    100032: Siding
+    100034: Siding.001
+    100036: Upper Siding
+    100038: Upper Siding.001
+    100040: View deck 1
+    400000: Corner Tube
+    400002: Corner Tube.001
+    400004: Corner Tube.002
+    400006: Corner Tube.003
+    400008: Corner Tube.004
+    400010: Corner Tube.005
+    400012: Cube
+    400014: Cylinder
+    400016: Cylinder.001
+    400018: Cylinder.002
+    400020: Cylinder.003
+    400022: Deck
+    400024: Main Building
+    400026: //RootNode
+    400028: Path for Tube.003
+    400030: Path for Tube.004
+    400032: Siding
+    400034: Siding.001
+    400036: Upper Siding
+    400038: Upper Siding.001
+    400040: View deck 1
+    2300000: Corner Tube
+    2300002: Corner Tube.001
+    2300004: Corner Tube.002
+    2300006: Corner Tube.003
+    2300008: Corner Tube.004
+    2300010: Corner Tube.005
+    2300012: Cube
+    2300014: Cylinder
+    2300016: Cylinder.001
+    2300018: Cylinder.002
+    2300020: Cylinder.003
+    2300022: Deck
+    2300024: Main Building
+    2300026: Path for Tube.003
+    2300028: Path for Tube.004
+    2300030: Siding
+    2300032: Siding.001
+    2300034: Upper Siding
+    2300036: Upper Siding.001
+    2300038: View deck 1
+    3300000: Corner Tube
+    3300002: Corner Tube.001
+    3300004: Corner Tube.002
+    3300006: Corner Tube.003
+    3300008: Corner Tube.004
+    3300010: Corner Tube.005
+    3300012: Cube
+    3300014: Cylinder
+    3300016: Cylinder.001
+    3300018: Cylinder.002
+    3300020: Cylinder.003
+    3300022: Deck
+    3300024: Main Building
+    3300026: Path for Tube.003
+    3300028: Path for Tube.004
+    3300030: Siding
+    3300032: Siding.001
+    3300034: Upper Siding
+    3300036: Upper Siding.001
+    3300038: View deck 1
+    4300000: Corner Tube.001
+    4300002: Corner Tube.002
+    4300004: Corner Tube.003
+    4300006: Corner Tube.004
+    4300008: Corner Tube.005
+    4300010: Cylinder.001
+    4300012: Cylinder.002
+    4300014: Cylinder.003
+    4300016: Deck
+    4300018: Main Building
+    4300020: Path for Tube.003
+    4300022: Path for Tube.004
+    4300024: Corner Tube
+    4300026: Siding.001
+    4300028: Upper Siding
+    4300030: Upper Siding.001
+    4300032: View deck 1
+    4300034: Siding
+    4300036: Cube
+    4300038: Cylinder
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .100000001
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 

@@ -1,0 +1,94 @@
+fileFormatVersion: 2
+guid: 42ec37e6f6fb7a44a8393fbeeccf1f2a
+ModelImporter:
+  serializedVersion: 16
+  fileIDToRecycleName:
+    100000: CarbonFiberLarge
+    100002: CarbonFiberMedium1
+    100004: //RootNode
+    100006: Tower
+    100008: Tower2
+    100010: Tower_MeshPart0
+    100012: Tower_MeshPart1
+    100014: Tower_MeshPart2
+    400000: CarbonFiberLarge
+    400002: CarbonFiberMedium1
+    400004: //RootNode
+    400006: Tower
+    400008: Tower2
+    400010: Tower_MeshPart0
+    400012: Tower_MeshPart1
+    400014: Tower_MeshPart2
+    2300000: CarbonFiberLarge
+    2300002: CarbonFiberMedium1
+    2300004: Tower2
+    2300006: Tower_MeshPart0
+    2300008: Tower_MeshPart1
+    2300010: Tower_MeshPart2
+    3300000: CarbonFiberLarge
+    3300002: CarbonFiberMedium1
+    3300004: Tower2
+    3300006: Tower_MeshPart0
+    3300008: Tower_MeshPart1
+    3300010: Tower_MeshPart2
+    4300000: Tower2
+    4300002: CarbonFiberMedium1
+    4300004: CarbonFiberLarge
+    4300006: Tower_MeshPart0
+    4300008: Tower_MeshPart1
+    4300010: Tower_MeshPart2
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
