@@ -1,5 +1,5 @@
 ﻿#pragma strict
-var startHeight : float = 15.0;
+var startHeight : float = 25.0;
 
 
 private var _killTimer : float = 1;
