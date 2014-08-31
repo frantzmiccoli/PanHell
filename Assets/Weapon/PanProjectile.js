@@ -1,5 +1,5 @@
 ﻿#pragma strict
-var startHeight : float = 20.0;
+var startHeight : float = 15.0;
 
 
 private var _killTimer : float = 1;
@@ -12,7 +12,7 @@ private var _audio_clips = [];
 function Start () {
 	transform.position.y = startHeight;
 	transform.rotation.eulerAngles = Vector3(Random.Range(-30,30),Random.Range(0,360),Random.Range(-60,60));
-	rigidbody.AddForce(0,-100,0);
+	rigidbody.AddForce(0,-1000,0);
 }
 
 function Update () {
