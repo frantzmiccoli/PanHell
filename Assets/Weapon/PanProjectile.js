@@ -7,7 +7,8 @@ private var _killMe : int = 0;
 private var _startTimer : float = 0.25;
 
 private var AUDIO_CLIP_NAMES = ['pan1', 'pan2', 'pan3', 'pan4'];
-private var _audio_clips = [];
+
+private var lastPosition : Vector3; 
 
 function Awake() {
 	transform.position.y = startHeight;
@@ -16,25 +17,36 @@ function Awake() {
 }
 
 function Update () {
+	var currentPosition = this.transform.position;
+	
+	if (lastPosition != Vector3.zero) {
+		 var delta = currentPosition - lastPosition;
+		 if (delta.magnitude < 0.1) {
+		 	_kill();
+		 } 
+	}
+	this.lastPosition = currentPosition;
+
 	if (_killMe) {
 		_killTimer -= Time.deltaTime;
 		if (_killTimer <= 0) {
 			Destroy(gameObject);
 		}
-	} else {
-		
 	}
 	
 	_startTimer -= Time.deltaTime;
 }
 
 function OnCollisionEnter(col: Collision) {
+	_kill();
+}
+
+function _kill() {
 	if ((_startTimer <= 0) && (_killMe != 1)) {
 		_killMe = 1;
 		_killTimer = 1;
 		_playSound();
 	}
-	
 }
 
 function _playSound() {
