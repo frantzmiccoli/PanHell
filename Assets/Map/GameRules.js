@@ -2,7 +2,7 @@
 var player: Transform;
 
 private var totalEnemies : int = 0;
-private var timeRemaining : float = 3.0*60;
+private var timeRemaining : float = 1.0*60;
 private var bgm : AudioSource;
 private var scoreTxt : GUIText;
 private var gameOver : boolean = false;
@@ -76,11 +76,11 @@ function Update () {
 		timeRemaining = 0;
 	}
 	
-	if (timeRemaining < 60) {
+	if (timeRemaining < 30) {
 		
 		bgm.audio.pitch = 1.1;
 	}
-	if (timeRemaining < 30) {
+	if (timeRemaining < 10) {
 		
 		bgm.audio.pitch = 1.25;
 	}
