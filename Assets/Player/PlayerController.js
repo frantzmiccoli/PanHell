@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 var cursorTexture : Texture2D;
-var cursorMode : CursorMode = CursorMode.Auto;
+var cursorMode : CursorMode = CursorMode.ForceSoftware;
 var hotSpot : Vector2 = Vector2(175, 175);
 var laser : Transform;
 private var isFiring : boolean = false;
@@ -15,7 +15,10 @@ private var chMotor: CharacterMotor;
 private var ch: CharacterController;
 private var tr: Transform;
 private var height: float; // initial height
-
+private var animTimer: float = 0;
+private var animTimer2: float = 0;
+private var fparms: Transform;
+private var fparmsOrigin: Vector3;
 function Start () {
 	laser = transform.Find("Main Camera/FirstPersonArm/Laser");
 	isFiring = false;
@@ -26,11 +29,14 @@ function Start () {
 	tr = transform;
 	ch = GetComponent(CharacterController);
 	height = ch.height;
+	fparms = transform.Find("Main Camera/FirstPersonArm");
+	fparmsOrigin = fparms.transform.localPosition;
+	
 }
 function UpdateLaser() {
 	//Debug.Log(laser);
 	if (isFiring) {
-		laser.active = true;
+		laser.gameObject.active = true;
 		var rayHit : RaycastHit;
     	var ray = Ray(Camera.main.transform.position,Camera.main.transform.forward);
     	if(Physics.Raycast(ray, rayHit)) {
@@ -40,11 +46,18 @@ function UpdateLaser() {
     	}
 		
 	} else {
-		laser.active = false;
+		laser.gameObject.active = false;
 	}
 }
 function Update () {
 	UpdateLaser();
+	if (ch.isGrounded) {
+		animTimer +=  Mathf.Clamp(ch.velocity.magnitude,0.0,10.0)*Time.deltaTime*2.0;
+	}
+	animTimer2 += Time.deltaTime;
+	fparms.localPosition.y = fparmsOrigin.y + 0.05*Mathf.Sin(animTimer) + 0.05*Mathf.PerlinNoise(0.5*animTimer2,0);
+	fparms.localPosition.x = fparmsOrigin.x + 0.05*Mathf.Cos(0.5*animTimer) + 0.05*Mathf.PerlinNoise(0,0.5*animTimer2);
+	
 }
 
     // Click for Object name and position script
