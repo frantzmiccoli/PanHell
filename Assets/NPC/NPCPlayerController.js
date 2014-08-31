@@ -2,8 +2,13 @@
 
 class NPCPlayerController extends MonoBehaviour {
 
-	private var SPEED_MIN : float = 1.5;
-	private var SPEED_MAX : float = 1.5;
+	private var SPEED_MIN : float = 2;
+	private var SPEED_MAX : float = 0.5;
+	
+	private var SAME_DIRECTION_MAX : float = 1;
+	private var SAME_DIRECTION_MIN : float = 3;
+	
+	private var DIRECTION_DEVIATION_SCALE = 0.5;
 
 	private var speed : float;
 	
@@ -13,6 +18,8 @@ class NPCPlayerController extends MonoBehaviour {
 	private var controller : CharacterController;
 	
 	private var targetDirection : Vector3;
+	private var lastDirectionUpdateDate : float = 0.0;
+	
 
 	public function Start() {
 		this.speed = Random.value * (this.SPEED_MAX - this.SPEED_MIN) + this.SPEED_MIN;
@@ -22,6 +29,7 @@ class NPCPlayerController extends MonoBehaviour {
 	}
 
 	public function Update() {
+		this.considerDirectionUpdate();
 		this.translate();
 	}
 	
@@ -59,14 +67,9 @@ class NPCPlayerController extends MonoBehaviour {
 		}
 		var normalToObject = rayHit.normal;
 		var reflection = Vector3.Reflect(vectorToClosestPoint, normalToObject);
-		reflection.y = 0;
+		reflection.y = 0;		
 		
-		Debug.Log(reflection);
-		Debug.Log(this.transform.position);
-		Debug.DrawRay(this.controller.transform.position, reflection, Color.green);
-		
-		
-		this.targetDirection = reflection;
+		this.headTo(reflection);
 	}
 	
 	private function translate() {
@@ -76,5 +79,41 @@ class NPCPlayerController extends MonoBehaviour {
 		}
 		this.transform.forward = this.controller.velocity;
 		this.motor.inputMoveDirection = this.targetDirection;
+	}
+	
+	private function updateSpeed() {
+		var newSpeed = Random.value * (this.SPEED_MAX - this.SPEED_MIN) + this.SPEED_MIN;
+		if (this.speed == 0) {
+			this.speed = newSpeed;
+			return;
+		}
+		// Exponential average smoothing
+		var exponentialFactor = 0.6;
+		this.speed = (newSpeed * exponentialFactor) + (this.speed * (1 - exponentialFactor));
+	}
+	
+	private function considerDirectionUpdate() {
+		var directionUpdateDelta = Time.time - this.lastDirectionUpdateDate;
+		var minExceededTime = directionUpdateDelta - this.SAME_DIRECTION_MIN;
+		if (minExceededTime < 0) {
+			return;
+		}
+		var directionUpdateScale = this.SAME_DIRECTION_MIN - this.SAME_DIRECTION_MAX;
+		var shouldUpdate = Random.value * directionUpdateScale < minExceededTime;
+		if (shouldUpdate) {
+			var randomDirection = Vector3(Random.value, 0, Random.value) - Vector3(0.5, 0, 0.5);
+			var randomDirectionWeight = this.DIRECTION_DEVIATION_SCALE * Random.value;
+			var newDirection = (randomDirectionWeight * randomDirection.normalized) + (this.targetDirection.normalized * (1 - randomDirectionWeight));
+			this.headTo(newDirection);
+			Debug.Log('direction update');
+		} else {
+		
+		}
+	}
+	
+	private function headTo(direction : Vector3) {
+		this.updateSpeed();
+		this.lastDirectionUpdateDate = Time.time;
+		this.targetDirection = direction;
 	}
 }
