@@ -4,7 +4,7 @@ var startHeight : float = 25.0;
 
 private var _killTimer : float = 1;
 private var _killMe : int = 0;
-private var _startTimer : float = 1.0;
+private var _startTimer : float = 0.25;
 
 private var AUDIO_CLIP_NAMES = ['pan1', 'pan2', 'pan3', 'pan4'];
 private var _audio_clips = [];
