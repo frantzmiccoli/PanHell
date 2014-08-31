@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: e5386a4e1bce24f829bf429ee1d9382f
+guid: 42b7dffa2345e4aa58488a8715331096
 ModelImporter:
   serializedVersion: 16
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: joint16
-    100004: joint17
-    100006: joint18
-    100008: joint19
-    100010: joint20
-    100012: joint21
-    100014: joint22
-    100016: joint23
-    100018: joint24
-    100020: joint25
-    100022: joint26
-    100024: joint27
-    100026: joint28
-    100028: joint29
-    100030: joint30
-    100032: joint31
-    100034: joint32
-    100036: joint33
-    100038: joint34
-    100040: joint35
-    100042: joint36
-    100044: joint37
-    100046: joint38
-    100048: pCube2
-    100050: group
+    100000: camera1
+    100002: //RootNode
+    100004: group
+    100006: joint16
+    100008: joint17
+    100010: joint18
+    100012: joint19
+    100014: joint20
+    100016: joint21
+    100018: joint22
+    100020: joint23
+    100022: joint24
+    100024: joint25
+    100026: joint26
+    100028: joint27
+    100030: joint28
+    100032: joint29
+    100034: joint30
+    100036: joint31
+    100038: joint32
+    100040: joint33
+    100042: joint34
+    100044: joint35
+    100046: joint36
+    100048: joint37
+    100050: joint38
     100052: pasted__pCube10
     100054: pasted__pCube11
     100056: pasted__pCube12
@@ -86,33 +86,33 @@ ModelImporter:
     100160: pasted__transform7
     100162: pasted__transform8
     100164: pasted__transform9
-    100166: camera1
-    400000: //RootNode
-    400002: joint16
-    400004: joint17
-    400006: joint18
-    400008: joint19
-    400010: joint20
-    400012: joint21
-    400014: joint22
-    400016: joint23
-    400018: joint24
-    400020: joint25
-    400022: joint26
-    400024: joint27
-    400026: joint28
-    400028: joint29
-    400030: joint30
-    400032: joint31
-    400034: joint32
-    400036: joint33
-    400038: joint34
-    400040: joint35
-    400042: joint36
-    400044: joint37
-    400046: joint38
-    400048: pCube2
-    400050: group
+    100166: pCube2
+    400000: camera1
+    400002: //RootNode
+    400004: group
+    400006: joint16
+    400008: joint17
+    400010: joint18
+    400012: joint19
+    400014: joint20
+    400016: joint21
+    400018: joint22
+    400020: joint23
+    400022: joint24
+    400024: joint25
+    400026: joint26
+    400028: joint27
+    400030: joint28
+    400032: joint29
+    400034: joint30
+    400036: joint31
+    400038: joint32
+    400040: joint33
+    400042: joint34
+    400044: joint35
+    400046: joint36
+    400048: joint37
+    400050: joint38
     400052: pasted__pCube10
     400054: pasted__pCube11
     400056: pasted__pCube12
@@ -170,16 +170,11 @@ ModelImporter:
     400160: pasted__transform7
     400162: pasted__transform8
     400164: pasted__transform9
-    400166: camera1
-    2300000: //RootNode
-    2300002: pCube2
-    2300004: pasted__polySurface11
-    3300000: //RootNode
-    3300002: pCube2
-    3300004: pasted__polySurface11
-    4300000: pCube1
-    4300002: pCube2
-    4300004: pasted__polySurface11
+    400166: pCube2
+    2300000: pasted__polySurface11
+    3300000: pasted__polySurface11
+    4300000: pCube2
+    4300002: pasted__polySurface11
     9500000: //RootNode
     13700000: pCube2
   materials:
@@ -201,7 +196,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: .00999999978
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
