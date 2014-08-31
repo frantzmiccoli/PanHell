@@ -5,12 +5,13 @@ class NPCPlayerController extends MonoBehaviour {
 	private var SPEED_MIN : float = 2;
 	private var SPEED_MAX : float = 0.5;
 	
-	private var SAME_DIRECTION_MAX : float = 1;
-	private var SAME_DIRECTION_MIN : float = 3;
+	private var SAME_DIRECTION_MAX : float = 0.5;
+	private var SAME_DIRECTION_MIN : float = 2;
 	
-	private var DIRECTION_DEVIATION_SCALE = 0.5;
+	private var DIRECTION_DEVIATION_SCALE = 0.8;
+	private var DIRECTION_DEVIATION_FORCE_MAJOR = true;
 	
-	private var AVOIDANCE_DURATION = 1;
+	private var AVOIDANCE_DURATION = 1.0;
 	
 	private var VELOCITY_Y_MIN = -0.2;
 	private var VELOCITY_Y_MAX = 0.2;
@@ -38,10 +39,9 @@ class NPCPlayerController extends MonoBehaviour {
 	}
 
 	public function Update() {
-		var timeFromLastAvoidance = Time.time - this.lastAvoidanceTime;
-		var inAvoidance = this.AVOIDANCE_DURATION > timeFromLastAvoidance;
+		var inAvoidance = this.isInAvoidance();
 	
-		if (inAvoidance) {
+		if (!inAvoidance) {
 			this.considerDirectionUpdate();
 		}
 		this.translate();
@@ -69,24 +69,47 @@ class NPCPlayerController extends MonoBehaviour {
 	 * On trigger with a bigger collider that enables collision detection
 	 */
 	public function OnTriggerEnter (collider : Collider) {
-		var closestColliderPoint : Vector3 = collider.ClosestPointOnBounds(this.transform.position);
+		Debug.Log('trigger:' + collider.name);
+	
+		var hit : RaycastHit;
 		var currentPosition : Vector3 = this.transform.position;
+		var collisionDirection = this.controller.velocity;
+		collisionDirection.y = 0;
+		collisionDirection.Normalize();
+		var touchSomething = Physics.SphereCast(currentPosition, 0.6, collisionDirection, hit, 1.6);
+
+		if (!touchSomething) {
+			return;
+		}
+	
+		var closestColliderPoint : Vector3 = hit.point;
+		
 		var vectorToClosestPoint : Vector3 = closestColliderPoint - currentPosition;
-		var absoluteDotProductWithTop = Mathf.Abs(Vector3.Dot(vectorToClosestPoint, Vector3.up));
+		
+		var dotProductWithTop : float = Vector3.Dot(vectorToClosestPoint, Vector3.up);
+		var absoluteDotProductWithTop : float = Mathf.Abs(dotProductWithTop);
+		Debug.Log(absoluteDotProductWithTop);
+		Debug.Log(dotProductWithTop);
 		
 		if ((absoluteDotProductWithTop > 0.4) || (vectorToClosestPoint.magnitude < 0.1)) {
 			return; // Nothing to do here we must be colliding with the plan
 		}
 		
+		vectorToClosestPoint.y = 0;
+		
 		var rayToSurface = new Ray(this.transform.position, vectorToClosestPoint);
+		
 		var rayHit : RaycastHit;
 		if (!(Physics.Raycast(rayToSurface, rayHit, 10))) {
 			// This case may occure when an object enters in the sphere but won't raise any real collision
 			return;
 		}
 		var normalToObject = rayHit.normal;
+		
 		var reflection = Vector3.Reflect(vectorToClosestPoint, normalToObject);
 		reflection.y = 0;		
+		
+		this.lastAvoidanceTime = Time.time;
 		
 		this.headTo(reflection);
 	}
@@ -110,7 +133,6 @@ class NPCPlayerController extends MonoBehaviour {
 	}
 	
 	private function updatePositionsInformations() {
-		Debug.Log('registering new position');
 		this.positionsLast.Push(this.transform.position);
 		
 		while (this.positionsLast.length > 40) {
@@ -129,24 +151,18 @@ class NPCPlayerController extends MonoBehaviour {
 	}
 	
 	private function handleStuck() {
-		Debug.Log('handle Stuck');
 	
 		var moveQuantity : float = this.getLastPositionsMoveQuantity();
 		
 		var goodSpeed = (moveQuantity > 0.1);
 		if (goodSpeed) {
-			Debug.Log('registering good speed');
 			this.registerCorrectPosition();
 		} 
 		
 		var stuck = (moveQuantity < 0.01) && (moveQuantity >= 0.0);
+	
 		
-		Debug.Log(moveQuantity);
-		
-		
-		if (stuck) {	
-			Debug.Log('badddd');
-			Debug.Log('avoidance code');
+		if (stuck) {
 			this.registerStuck();
 			this.avoidStucking();
 		}
@@ -229,7 +245,12 @@ class NPCPlayerController extends MonoBehaviour {
 		if (shouldUpdate) {
 			var randomDirection = Vector3(Random.value, 0, Random.value) - Vector3(0.5, 0, 0.5);
 			var randomDirectionWeight = this.DIRECTION_DEVIATION_SCALE * Random.value;
-			var newDirection = (randomDirectionWeight * randomDirection.normalized) + (this.targetDirection.normalized * (1 - randomDirectionWeight));
+			
+			randomDirection.Normalize();
+
+			var newDirection = (randomDirectionWeight * randomDirection) + (this.targetDirection.normalized * (1 - randomDirectionWeight));
+			
+			Debug.Log('newDirection');
 			this.headTo(newDirection);
 		}
 	}
@@ -238,5 +259,11 @@ class NPCPlayerController extends MonoBehaviour {
 		this.updateSpeed();
 		this.lastDirectionUpdateDate = Time.time;
 		this.targetDirection = direction;
+	}
+	
+	private function isInAvoidance() {
+		var timeFromLastAvoidance = Time.time - this.lastAvoidanceTime;
+		var inAvoidance = this.AVOIDANCE_DURATION > timeFromLastAvoidance;
+		return inAvoidance;
 	}
 }
