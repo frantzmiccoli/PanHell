@@ -9,7 +9,7 @@ private var _startTimer : float = 0.25;
 private var AUDIO_CLIP_NAMES = ['pan1', 'pan2', 'pan3', 'pan4'];
 private var _audio_clips = [];
 
-function Start () {
+function Awake() {
 	transform.position.y = startHeight;
 	transform.rotation.eulerAngles = Vector3(Random.Range(-30,30),Random.Range(0,360),Random.Range(-60,60));
 	rigidbody.AddForce(0,-1000,0);

@@ -19,7 +19,7 @@ private var animTimer: float = 0;
 private var animTimer2: float = 0;
 private var fparms: Transform;
 private var fparmsOrigin: Vector3;
-function Start () {
+function Awake() {
 	laser = transform.Find("Main Camera/FirstPersonArm/Laser");
 	isFiring = false;
 	Screen.showCursor = false; 
