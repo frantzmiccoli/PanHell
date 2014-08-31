@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
 guid: 53924ac84bbed4f40984d64351d8655d
+=======
+<<<<<<< HEAD
+guid: 17f1040ccc5af9d4b84cadb59ecfc12e
+=======
+guid: 53924ac84bbed4f40984d64351d8655d
+>>>>>>> 557ba2a2bd05dea0b8e0512946d5e4d210b4584f
+>>>>>>> Stashed changes
 folderAsset: yes
 DefaultImporter:
   userData: 
