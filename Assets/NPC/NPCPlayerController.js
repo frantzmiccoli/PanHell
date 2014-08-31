@@ -129,15 +129,17 @@ class NPCPlayerController extends MonoBehaviour {
 	}
 	
 	private function handleStuck() {
+		Debug.Log('handle Stuck');
+	
 		var moveQuantity : float = this.getLastPositionsMoveQuantity();
 		
-		var goodSpeed = (moveQuantity > 0.5);
+		var goodSpeed = (moveQuantity > 0.1);
 		if (goodSpeed) {
 			Debug.Log('registering good speed');
 			this.registerCorrectPosition();
 		} 
 		
-		var stuck = (moveQuantity < 0.01) && (moveQuantity > 0.0);
+		var stuck = (moveQuantity < 0.01) && (moveQuantity >= 0.0);
 		
 		Debug.Log(moveQuantity);
 		
@@ -169,7 +171,7 @@ class NPCPlayerController extends MonoBehaviour {
 			return -1.0;
 		}
 		
-		return summedMoved;
+		return summedMoved / viewed;
 	}
 	
 	private function registerStuck() {
@@ -182,11 +184,19 @@ class NPCPlayerController extends MonoBehaviour {
 	}
 	
 	private function avoidStucking() {
-		var lastViablePosition : Vector3 = this.positionsViable.Pop();
-		this.positionsViable.Push(lastViablePosition); // We don't want to drop it and I'm not 
-		var currentPosition = this.transform.position;
-		var direction = lastViablePosition - currentPosition;
+		var direction : Vector3;
+		if (positionsViable.length > 0) {
+			var lastViablePosition : Vector3 = this.positionsViable[positionsViable.length - 1];
+			var currentPosition = this.transform.position;
+			direction = lastViablePosition - currentPosition;
+		} else {
+			Debug.Log('No escape position available, picking a random one');
+			direction = Vector3(Random.value, 0, Random.value);
+			direction.Normalize();
+		}
+		
 		var accessible = !Physics.Raycast(currentPosition, direction, direction.magnitude);
+		
 
 		if (accessible) {
 			Debug.Log('avoiding problems');
