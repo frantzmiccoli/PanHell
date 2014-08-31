@@ -1,7 +1,7 @@
 ﻿#pragma strict
 
 var cursorTexture : Texture2D;
-var cursorMode : CursorMode = CursorMode.Auto;
+var cursorMode : CursorMode = CursorMode.ForceSoftware;
 var hotSpot : Vector2 = Vector2(175, 175);
 var laser : Transform;
 private var isFiring : boolean = false;
@@ -26,6 +26,8 @@ function Start () {
 	tr = transform;
 	ch = GetComponent(CharacterController);
 	height = ch.height;
+	
+	
 }
 function UpdateLaser() {
 	//Debug.Log(laser);
