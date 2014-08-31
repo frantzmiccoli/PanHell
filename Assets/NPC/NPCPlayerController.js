@@ -105,7 +105,6 @@ class NPCPlayerController extends MonoBehaviour {
 			var randomDirectionWeight = this.DIRECTION_DEVIATION_SCALE * Random.value;
 			var newDirection = (randomDirectionWeight * randomDirection.normalized) + (this.targetDirection.normalized * (1 - randomDirectionWeight));
 			this.headTo(newDirection);
-			Debug.Log('direction update');
 		} else {
 		
 		}
